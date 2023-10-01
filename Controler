@@ -1,0 +1,102 @@
+package controler;
+
+import java.util.Scanner;
+
+import Pharmacy_dao.Dao;
+import dto.Pharmacy_dto;
+
+public class Controler {
+  public static void main(String[] args) {
+	  Scanner sc=new Scanner(System.in);
+	  
+	
+	System.out.println("welcome   to medicine store  ");
+	
+	System.out.println(" chose   operation");
+	System.out.println("--> press 1  for insert data");
+	System.out.println("--> press 2  for update data");
+	System.out.println("--> press 3  for Read data by id");
+	System.out.println("--> press 4  for Read all data");
+	System.out.println("--> press 5  for Delete data by id");
+	System.out.println("--> press 6 for Dalete all data");
+	Pharmacy_dto pdto=new Pharmacy_dto();
+	Dao dao=new Dao();
+	int input=sc.nextInt();
+	switch (input) {
+	//for Insert data
+	case 1:
+		System.out.println("enter   the medicine id");
+		int id=sc.nextInt();
+		System.out.println("enter the medicine name");
+		String name=sc.next();
+		System.out.println("enter the brand");
+		String brand=sc.next();
+		System.out.println("enter the price");
+		double price=sc.nextDouble();
+		
+		
+		pdto.setMedicine_id(id);
+		pdto.setMedicine_name(name);
+		pdto.setBrand_name(brand);
+		pdto.setMedicine_price(price);
+		
+		dao.insert(pdto);
+		System.out.println("data stored successfully");
+		break;
+     // insert data close
+		
+		//updated data
+	case 2:
+		
+		System.out.println("enter   the medicine id");
+		int uid=sc.nextInt();
+		System.out.println("enter the medicine name");
+		String uname=sc.next();
+		System.out.println("enter the brand");
+		String ubrand=sc.next();
+		System.out.println("enter the price");
+		double uprice=sc.nextDouble();
+		
+		pdto.setMedicine_id(uid);
+		pdto.setMedicine_name(uname);
+		pdto.setBrand_name(ubrand);
+		pdto.setMedicine_price(uprice);
+		
+		dao.updateByid(pdto);
+		System.out.println("data Updated  successfully");
+		break;
+		
+		//read by id
+	case 3:
+		System.out.println("enter id for medicine details");
+		int rid=sc.nextInt();
+
+		dao.ReadByid(rid);
+		System.out.println("data fetch  Successfully");
+		break;
+		//read All
+	case 4:
+		dao.readAll();
+		System.out.println("data Ftched Successfully");
+
+		break;
+		//delete by id
+	case 5:
+		System.out.println("enter id for medicine details");
+		int Did=sc.nextInt();
+
+		dao.deleteByid(Did);
+		System.out.println("data deleted  Successfully");
+		break;
+		//delete all
+	case 6:
+		dao.deleteAll();
+		System.out.println("all data Deleted Succesfully");
+		break;
+	default:
+		break;
+	}
+	
+	
+}
+}
